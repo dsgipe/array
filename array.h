@@ -16,6 +16,7 @@ public:
     Arr(double* valInit, int m,int n);
     //Initializers
     void Init(double* valInit, int m,int n);
+    void Init(double valInit, int m,int n);
     void Init(int m,int n);
     //Operators
     Arr& operator=(const Arr& obj);
@@ -36,6 +37,7 @@ public:
     Arr transpose();
     Arr cholesky();
     double & element(int i, int j);
+    void push(double value, int i,int j); 
 };
 Arr times(const double intval, const Arr& obj);
 struct Array{
@@ -46,5 +48,6 @@ struct Array{
 Arr mu_num_den(Arr& UPsiX,Arr& Y,Arr& oneN);
 void buildPsi(Arr& x, double* theta, Arr& CKPsixRtn);
 void Cholesky_arr(const Arr& S,Arr& D);
+Arr concatinate(Arr& obj1, Arr& obj2, int dim);
 
 

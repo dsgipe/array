@@ -31,6 +31,14 @@ void Arr::Init(double* valInit,int m, int n){
     val = new double[m*n];
     for(int ii = 0; ii < M*N;ii++){ val[ii] = valInit[ii];}
 }
+void Arr::Init(double valInit,int m, int n){
+    //constructor
+    M = m;
+    N = n;
+    val = new double[m*n];
+    for(int ii = 0; ii < M*N;ii++){ val[ii] = valInit;}
+}
+
 void Arr::Init(int m, int n){
     //constructor
     M = m;
@@ -261,5 +269,33 @@ double& Arr::element(int i, int j){
     // row and column info
     //---------------------------------------------//
     return val[j*N+i];
-
+}
+void Arr::push(double value, int i, int j){
+    //---------------------------------------------//
+    // inputs:
+    //    i: Row index
+    //    j: Column index
+    // Convert single array indexing to easy find 
+    // row and column info
+    //---------------------------------------------//
+    val[j*N+i] = value;
+}
+Arr concatinate(Arr& obj1, Arr& obj2,int dim){
+    Arr ArrRtn;
+    int M,N;
+    //If the concatinate rows
+    M = obj1.M;
+    N = obj1.N+obj2.N;
+    ArrRtn.Init(0.0,M,N);
+    for (int ii = 0; ii < ArrRtn.M; ii++){
+        for (int jj = 0; jj < obj1.N; jj++){
+            ArrRtn.push(obj1.element(ii,jj),ii,jj);
+        }
+    } 
+    for (int ii = obj1.N; ii < N; ii++){
+        for (int jj = 0; jj < M; jj++){
+            ArrRtn.push(obj2.element(ii-obj1.N,jj),ii,jj);
+        }
+    } 
+    return ArrRtn;
 }
