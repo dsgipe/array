@@ -94,25 +94,35 @@ Arr Arr::transpose(){
     // Returns:
     //     transpose of arr
     //---------------------------------------------//
-    Arr tran_arr;
-    int nc = M;
-    int nr = N;
-    tran_arr.Init(M,N);
-    int counter  = 0;
-    int b = 0;
-    for(int ii = 0; ii < nc*nr;ii++){
-        tran_arr.val[b+counter*nr] = val[ii];
-        counter++;
-        if(counter == nc){
-           counter =0;
-           b++;
+    //Arr tran_arr;
+    //int nc = M;
+    //int nr = N;
+    //tran_arr.Init(M,N);
+    //int counter  = 0;
+    //int b = 0;
+    //for(int ii = 0; ii < nc*nr;ii++){
+    //    tran_arr.val[b+counter*nr] = val[ii];
+    //    counter++;
+    //    if(counter == nc){
+    //       counter =0;
+    //       b++;
+    //    }
+    //}
+    Arr RtnArray;
+    RtnArray.Init(N,M);
+    for (int ii = 0; ii < M; ii++){
+        for (int jj = 0; jj <N; jj++){
+            RtnArray.push(element(jj,ii),ii,jj);
         }
     }
-    return tran_arr;
+    return RtnArray;
 
 }
 Arr& Arr::operator=(const Arr& obj){
     if (val ==NULL){
+        val = new double[M*N];
+    }else{
+        delete[] val;
         val = new double[M*N];
     }
     M = obj.M;
@@ -145,6 +155,9 @@ Arr Arr::cholesky(){
 }
 //************************************************
 Arr Arr::operator/(const Arr& obj){
+    //---------------------------------------------//
+    //         Matrix solution to Y=M*X
+    //---------------------------------------------//
     int NRHS = obj.N;
     int NLHS = obj.M;
     int *IPIV = new int[N+1];
@@ -284,18 +297,36 @@ Arr concatinate(Arr& obj1, Arr& obj2,int dim){
     Arr ArrRtn;
     int M,N;
     //If the concatinate rows
-    M = obj1.M;
-    N = obj1.N+obj2.N;
+    if (dim == 1){
+        M = obj1.M;
+        N = obj1.N+obj2.N;
+    }else{//concatinate columns
+        M = obj1.M+obj2.M;
+        N = obj1.N;
+    }
     ArrRtn.Init(0.0,M,N);
-    for (int ii = 0; ii < ArrRtn.M; ii++){
-        for (int jj = 0; jj < obj1.N; jj++){
+    //fill using first array
+    for (int ii = 0; ii < obj1.N; ii++){
+        for (int jj = 0; jj < obj1.M; jj++){
             ArrRtn.push(obj1.element(ii,jj),ii,jj);
         }
     } 
-    for (int ii = obj1.N; ii < N; ii++){
-        for (int jj = 0; jj < M; jj++){
-            ArrRtn.push(obj2.element(ii-obj1.N,jj),ii,jj);
-        }
-    } 
+    //---------------------------------------------//
+    //       fill using second array
+    //---------------------------------------------//
+    //concatinate rows
+    if (dim == 1){
+        for (int ii = obj1.N; ii < N; ii++){
+            for (int jj = 0; jj < M; jj++){
+                ArrRtn.push(obj2.element(ii-obj1.N,jj),ii,jj);
+            }
+        } 
+    }else{//concatinate columns
+        for (int ii = 0; ii < N; ii++){
+            for (int jj = obj1.M; jj < M; jj++){
+                ArrRtn.push(obj2.element(ii,jj-obj1.M),ii,jj);
+            }
+        } 
+    }
     return ArrRtn;
 }
