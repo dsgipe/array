@@ -14,6 +14,7 @@ public:
     Arr();
     Arr(const Arr& obj);//copy constructor
     Arr(double* valInit, int m,int n);
+    Arr(double valInit, int m,int n);
     //Initializers
     void Init(double* valInit, int m,int n);
     void Init(double valInit, int m,int n);
@@ -45,9 +46,6 @@ struct Array{
     int size;
 };
 
-Arr mu_num_den(Arr& UPsiX,Arr& Y,Arr& oneN);
-void buildPsi(Arr& x, double* theta, Arr& CKPsixRtn);
-void Cholesky_arr(const Arr& S,Arr& D);
 Arr concatinate(Arr& obj1, Arr& obj2, int dim);
 
 

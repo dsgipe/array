@@ -17,6 +17,13 @@ Arr::Arr(double* valInit,int m, int n){
     for(int ii = 0; ii < M*N;ii++){ val[ii] = valInit[ii];}
 }
 //************************************************
+Arr::Arr(double valInit,int m, int n){
+    M = m;
+    N = n;
+    val = new double[m*n];
+    for(int ii = 0; ii < M*N;ii++){ val[ii] = valInit;}
+}
+//************************************************
 Arr::Arr(const Arr& obj){//copy constuctor
     M = obj.M;
     N = obj.N;
@@ -330,3 +337,4 @@ Arr concatinate(Arr& obj1, Arr& obj2,int dim){
     }
     return ArrRtn;
 }
+
