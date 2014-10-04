@@ -101,20 +101,6 @@ Arr Arr::transpose(){
     // Returns:
     //     transpose of arr
     //---------------------------------------------//
-    //Arr tran_arr;
-    //int nc = M;
-    //int nr = N;
-    //tran_arr.Init(M,N);
-    //int counter  = 0;
-    //int b = 0;
-    //for(int ii = 0; ii < nc*nr;ii++){
-    //    tran_arr.val[b+counter*nr] = val[ii];
-    //    counter++;
-    //    if(counter == nc){
-    //       counter =0;
-    //       b++;
-    //    }
-    //}
     Arr RtnArray;
     RtnArray.Init(N,M);
     for (int ii = 0; ii < M; ii++){
@@ -288,6 +274,8 @@ double& Arr::element(int i, int j){
     // Convert single array indexing to easy find 
     // row and column info
     //---------------------------------------------//
+    if (i>=M || j >= N)
+        cout << "Pulling out of bounds data!!!\n";
     return val[j*N+i];
 }
 void Arr::push(double value, int i, int j){
@@ -298,6 +286,8 @@ void Arr::push(double value, int i, int j){
     // Convert single array indexing to easy find 
     // row and column info
     //---------------------------------------------//
+    if (i>=M || j >= N)
+        cout << "Pushing out of bounds data!!!\n";
     val[j*N+i] = value;
 }
 Arr concatinate(Arr& obj1, Arr& obj2,int dim){
