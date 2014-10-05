@@ -206,6 +206,19 @@ Arr Arr::operator+(const double intval){
     }
    return Arr (rtnArr,M,N); 
 }
+Arr Arr::operator-(const Arr& obj){
+    //---------------------------------------------//
+    // divide every element
+    //---------------------------------------------//
+    double rtnArr[M*N]; 
+    if (M*N != obj.M*obj.N)
+        cout << "Size not compatible, results are likely wrong!\n";
+    for (int ii = 0; ii < M*N;ii++){
+        rtnArr[ii]=val[ii]-obj.val[ii];
+    }
+   return Arr (rtnArr,M,N); 
+}
+//************************************************
 
 //************************************************
 Arr times(const double intval, const Arr& obj){
@@ -274,8 +287,6 @@ double& Arr::element(int i, int j){
     // Convert single array indexing to easy find 
     // row and column info
     //---------------------------------------------//
-    if (i>=M || j >= N)
-        cout << "Pulling out of bounds data!!!\n";
     return val[j*N+i];
 }
 void Arr::push(double value, int i, int j){
@@ -286,8 +297,6 @@ void Arr::push(double value, int i, int j){
     // Convert single array indexing to easy find 
     // row and column info
     //---------------------------------------------//
-    if (i>=M || j >= N)
-        cout << "Pushing out of bounds data!!!\n";
     val[j*N+i] = value;
 }
 Arr concatinate(Arr& obj1, Arr& obj2,int dim){

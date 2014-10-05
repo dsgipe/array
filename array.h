@@ -25,10 +25,11 @@ public:
     Arr operator*(const Arr& obj);//matrix multiply
     Arr operator%(const Arr& obj);//divide each value
     Arr operator%(const double intval);//divide each value
-    Arr operator,(const Arr& obj);  //multiple each value
-    Arr operator,(const int intval);//multiple each value
-    Arr operator+(const Arr& obj);  //multiple each value
-    Arr operator+(const double intval);//multiple each value
+    Arr operator,(const Arr& obj);  //multiply each value
+    Arr operator,(const int intval);//multiply each value
+    Arr operator+(const Arr& obj);  //add each value
+    Arr operator+(const double intval);//add each value
+    Arr operator-(const Arr& obj);  //subtract each value
     ~Arr();
     void print();
     void print(const char * message);
