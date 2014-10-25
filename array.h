@@ -15,6 +15,7 @@ public:
     Arr(const Arr& obj);//copy constructor
     Arr(double* valInit, int m,int n);
     Arr(double valInit, int m,int n);
+    Arr(int m,int n);
     //Initializers
     void Init(double* valInit, int m,int n);
     void Init(double valInit, int m,int n);
